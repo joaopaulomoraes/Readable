@@ -1,0 +1,554 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-01-24T01:33:58.798Z",
+	"__export_source": "insomnia.desktop.app:v5.12.4",
+	"resources": [
+		{
+			"_id": "wrk_fe92006da09842d497e887e8d88cbd78",
+			"created": 1516739847759,
+			"description": "",
+			"modified": 1516739847759,
+			"name": "Readable Udacity",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_0b99950d2b404580853c4d1802c09098",
+			"color": null,
+			"created": 1516739847786,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1516740626629,
+			"name": "Readable Udacity",
+			"parentId": "wrk_fe92006da09842d497e887e8d88cbd78",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_95b975cb149442b6ae639e11f1a4261f",
+			"cookies": [],
+			"created": 1516739847790,
+			"modified": 1516739847790,
+			"name": "Default Jar",
+			"parentId": "wrk_fe92006da09842d497e887e8d88cbd78",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_1db79c12885b47748e39cdab2d7e2d5d",
+			"created": 1516739876561,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1516740730327,
+			"modified": 1516743412400,
+			"name": "Categories",
+			"parentId": "wrk_fe92006da09842d497e887e8d88cbd78",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_0a0da9855db347c4905310daac582b49",
+			"created": 1516740730277,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1516740676963.5625,
+			"modified": 1516745077592,
+			"name": "Posts",
+			"parentId": "wrk_fe92006da09842d497e887e8d88cbd78",
+			"_type": "request_group"
+		},
+		{
+			"_id": "fld_59ccbe53c75e41a8bd8e6f53da481e26",
+			"created": 1516745051288,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1516740623600.125,
+			"modified": 1516745071718,
+			"name": "Comments",
+			"parentId": "wrk_fe92006da09842d497e887e8d88cbd78",
+			"_type": "request_group"
+		},
+		{
+			"_id": "env_2df641673a0041d9bee56d3c2b9d65e6",
+			"color": null,
+			"created": 1516740565522,
+			"data": {
+				"category": {
+					"name": "react"
+				},
+				"comment": {
+					"id": "894tuq4ut84ut8v4t8wun89g"
+				},
+				"post": {
+					"id": "8xf0y6ziyjabvozdd253nd"
+				},
+				"timestamp": "{% now 'unix', '' %}",
+				"vote": {
+					"downVote": "downVote",
+					"upVote": "upVote"
+				}
+			},
+			"isPrivate": false,
+			"modified": 1516747148698,
+			"name": "Readable Udacity",
+			"parentId": "env_0b99950d2b404580853c4d1802c09098",
+			"_type": "environment"
+		},
+		{
+			"_id": "req_b759ac7ef5e94a94a207691f666608af",
+			"authentication": {},
+			"body": {},
+			"created": 1516739891175,
+			"description": "Get all of the categories available for the app.",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				}
+			],
+			"metaSortKey": -1516739891175,
+			"method": "GET",
+			"modified": 1516740155788,
+			"name": "Categories - Get All",
+			"parameters": [],
+			"parentId": "fld_1db79c12885b47748e39cdab2d7e2d5d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/categories",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fd80c43eebd34462aa0595573ad88322",
+			"authentication": {},
+			"body": {},
+			"created": 1516740178790,
+			"description": "Get all of the posts for a particular category",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				}
+			],
+			"metaSortKey": -1516739891125,
+			"method": "GET",
+			"modified": 1516744288433,
+			"name": "Categories - Posts",
+			"parameters": [],
+			"parentId": "fld_1db79c12885b47748e39cdab2d7e2d5d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/{{ category.name }}/posts",
+			"_type": "request"
+		},
+		{
+			"_id": "req_875383d62dc04ad59101a3101debfaa3",
+			"authentication": {},
+			"body": {},
+			"created": 1516740739110,
+			"description": "Get all of the posts for a particular category",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				}
+			],
+			"metaSortKey": -1516740570236.6875,
+			"method": "GET",
+			"modified": 1516743677417,
+			"name": "Posts - Get All",
+			"parameters": [],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c27bd4ec76e24ee98a6b6f3b91235e3c",
+			"authentication": {},
+			"body": {},
+			"created": 1516740802496,
+			"description": "Get all of the posts",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				}
+			],
+			"metaSortKey": -1516740570211.6875,
+			"method": "GET",
+			"modified": 1516743709281,
+			"name": "Posts - Get by Id",
+			"parameters": [],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts/{{ post.id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_849e4762cd04460bab67c969365394ae",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"id\": \"dt32y6ziyjabv1sead253wq\",\n\t\"timestamp\": \"{{ timestamp}}\",\n  \"title\": \"A Title\",\n  \"body\": \"A body for my post\",\n  \"author\": \"Name Surname\",\n  \"category\": \"{{ category.name}}\"\n}"
+			},
+			"created": 1516741159904,
+			"description": "Add a new post",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_17033a8c7fa447ffad80ebcb582c928d",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740570186.6875,
+			"method": "POST",
+			"modified": 1516743683081,
+			"name": "Posts - Create",
+			"parameters": [
+				{
+					"id": "pair_9420965020564db1b8e660cf09e8b156",
+					"name": "",
+					"value": ""
+				}
+			],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts",
+			"_type": "request"
+		},
+		{
+			"_id": "req_8329e71ce684409ca9bd89c2ac63a64d",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"option\": \"{{ vote.upVote }}\"\n}"
+			},
+			"created": 1516741903802,
+			"description": "Add a new post",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_17033a8c7fa447ffad80ebcb582c928d",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740570136.6875,
+			"method": "POST",
+			"modified": 1516747216401,
+			"name": "Posts - Vote",
+			"parameters": [
+				{
+					"id": "pair_9420965020564db1b8e660cf09e8b156",
+					"name": "",
+					"value": ""
+				}
+			],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts/{{ post.id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4deaba4e1ab54b2583dd7c0834d510a0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"title\": \"New Title\",\n  \"body\": \"New Body\"\n}"
+			},
+			"created": 1516742173731,
+			"description": "Update the details of an existing post",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_17033a8c7fa447ffad80ebcb582c928d",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740570086.6875,
+			"method": "PUT",
+			"modified": 1516743691246,
+			"name": "Posts - Update",
+			"parameters": [
+				{
+					"id": "pair_9420965020564db1b8e660cf09e8b156",
+					"name": "",
+					"value": ""
+				}
+			],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts/{{ post.id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0ae2549ef1dd40c9b2021b003ac3d4de",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"delted\": true,\n  \"parentDeleted\": true\n}"
+			},
+			"created": 1516742335528,
+			"description": "Sets the deleted flag for a post to 'true'\nSets the parentDeleted flag for all child comments to 'true'",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_17033a8c7fa447ffad80ebcb582c928d",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740570036.6875,
+			"method": "DELETE",
+			"modified": 1516743693919,
+			"name": "Posts - Delete",
+			"parameters": [
+				{
+					"id": "pair_9420965020564db1b8e660cf09e8b156",
+					"name": "",
+					"value": ""
+				}
+			],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts/{{ post.id }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_58f8f693c59848229bdc707d5a2da151",
+			"authentication": {},
+			"body": {},
+			"created": 1516743135250,
+			"description": "Get all the comments for a single post",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				}
+			],
+			"metaSortKey": -1516740570199.1875,
+			"method": "GET",
+			"modified": 1516743711215,
+			"name": "Posts - Comments",
+			"parameters": [],
+			"parentId": "fld_0a0da9855db347c4905310daac582b49",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/posts/{{ post.id }}/comments",
+			"_type": "request"
+		},
+		{
+			"_id": "req_aca3c482eae84832b70a53795010e6c0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"id\": \"894tuq4ut84ut8v4t8wun89g\",\n  \"timestamp\": \"{{ timestamp}}\",\n  \"body\": \"A body for this post\",\n  \"author\": \"Name Surname\",\n  \"parentId\": \"6ni6ok3ym7mf1p33lnez\"\n}"
+			},
+			"created": 1516745141949,
+			"description": "Add a comment to a post",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_e3320a5fba504f848fc2796519fe3125",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740623550.125,
+			"method": "POST",
+			"modified": 1516746902873,
+			"name": "Comments - Create",
+			"parameters": [],
+			"parentId": "fld_59ccbe53c75e41a8bd8e6f53da481e26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/comments",
+			"_type": "request"
+		},
+		{
+			"_id": "req_a8c9bef035e246dda3bc58d52413fe1f",
+			"authentication": {},
+			"body": {},
+			"created": 1516745427224,
+			"description": "Get the details for a single comment",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				}
+			],
+			"metaSortKey": -1516740623600.125,
+			"method": "GET",
+			"modified": 1516747159538,
+			"name": "Comments - Get by Id",
+			"parameters": [],
+			"parentId": "fld_59ccbe53c75e41a8bd8e6f53da481e26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/comments/{{ comment.id  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c864e5461e4c486b8e770db4c392c5ed",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"option\": \"{{ vote.downVote }}\"\n}"
+			},
+			"created": 1516746724473,
+			"description": "Used for voting on a comment",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_d3bbb34023804f8db4433fa3014d1214",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740623525.125,
+			"method": "POST",
+			"modified": 1516747374675,
+			"name": "Comments - Vote",
+			"parameters": [],
+			"parentId": "fld_59ccbe53c75e41a8bd8e6f53da481e26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/comments/{{ comment.id  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_26225c9f28d0467391a48bda78d14963",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"timestamp\": \"{{ timestamp  }}\",\n  \"body\": \"New updated comment!\"\n}"
+			},
+			"created": 1516746824638,
+			"description": "Edit the details of an existing comment",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_d3bbb34023804f8db4433fa3014d1214",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740623512.625,
+			"method": "PUT",
+			"modified": 1516747012428,
+			"name": "Comments - Update",
+			"parameters": [],
+			"parentId": "fld_59ccbe53c75e41a8bd8e6f53da481e26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/comments/2jmj7l5r33lnezSw0yVb",
+			"_type": "request"
+		},
+		{
+			"_id": "req_c75910f6ca79472f8ae755bada9a151c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"delted\": true,\n  \"parentDeleted\": true\n}"
+			},
+			"created": 1516747025681,
+			"description": "Sets the deleted flag for a post to 'true'\nSets the parentDeleted flag for all child comments to 'true'",
+			"headers": [
+				{
+					"id": "pair_ba978ab99feb4c29b4eaa52dcc49746c",
+					"name": "Authorization",
+					"value": "Bearer cmVhZGFibGUtdWRhY2l0eS1wcm9qZWN0"
+				},
+				{
+					"id": "pair_17033a8c7fa447ffad80ebcb582c928d",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"metaSortKey": -1516740623462.625,
+			"method": "DELETE",
+			"modified": 1516747173825,
+			"name": "Comments - Delete",
+			"parameters": [
+				{
+					"id": "pair_9420965020564db1b8e660cf09e8b156",
+					"name": "",
+					"value": ""
+				}
+			],
+			"parentId": "fld_59ccbe53c75e41a8bd8e6f53da481e26",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": ":3001/comments/{{ comment.id  }}",
+			"_type": "request"
+		}
+	]
+}
