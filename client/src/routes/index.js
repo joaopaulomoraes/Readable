@@ -8,24 +8,6 @@ const routes = [
     path: '/',
     component: Posts
   },
-  /*
-  {
-    path: '/posts',
-    component: Posts,
-    routes: [
-      {
-        path: '/categories',
-        component: PostsByCategory,
-        routes: [
-          {
-            path: '/category/:category',
-            component: PostsByCategory
-          }
-        ]
-      }
-    ]
-  },
-  */
   {
     path: '/categories/:category',
     component: PostsByCategory
