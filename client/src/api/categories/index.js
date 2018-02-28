@@ -4,7 +4,7 @@ import ReadableAPI from '../'
  * @description Get all categories of api
  * @returns {object} All Categories and the action type
  */
-const getCategories = () => {
+export const getCategories = () => {
   return ReadableAPI.get('/categories')
 }
 
