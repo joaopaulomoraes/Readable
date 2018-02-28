@@ -56,7 +56,7 @@ export const updatePost = (postId) => {
 }
 
 /**
- * @description Promise to delete a post
+ * @description Promise to delete a post - Currying function
  * @param {string} postId - Post id
  * @param {object} objectData - Object data with deleted and parentDeleted values set to true
  * @returns {Promise} The post data with the deleted value set to true
