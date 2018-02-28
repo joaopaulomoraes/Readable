@@ -34,6 +34,12 @@ const styles = theme => ({
   }
 })
 
+/**
+ * @description Receives the values of the redux state and makes the order after being validated
+ * @param {object} values - All form data extracted from the state
+ * @param {object} dispatch - Make the dispatch with the data
+ * @returns {object} A new post data
+ */
 const onSubmit = (values, dispatch) => {
   const objectData = {
     id: generateId(),
@@ -50,6 +56,11 @@ const onSubmit = (values, dispatch) => {
   )
 }
 
+/**
+ * @description Validates user input
+ * @param {object} values - All form data extracted from the state
+ * @returns {string} Required - Errors message to the user about the required fields
+ */
 const validate = values => {
   const errors = {}
   const requiredFields = [
