@@ -5,8 +5,14 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware } from 'react-router-redux'
 import reducer from '../recuders'
 
+export
+const history = createHistory()
+
+const router = routerMiddleware(history)
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
@@ -14,6 +20,7 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(
       thunk,
+      router,
       logger
     )
   )
