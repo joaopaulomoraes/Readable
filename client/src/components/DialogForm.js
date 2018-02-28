@@ -4,6 +4,7 @@ import Dialog, {
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
+
 import FormPosts from './posts/FormPosts'
 
 const DialogForm = props => {
