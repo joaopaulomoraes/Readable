@@ -11,12 +11,15 @@ import {
   ExitToApp
 } from 'material-ui-icons'
 
+import { withRouter } from 'react-router-dom'
+
 const styles = {
   root: {
     width: '100%'
   },
   flex: {
-    flex: 1
+    flex: 1,
+    cursor: 'pointer'
   },
   menuButton: {
     marginLeft: -12,
@@ -34,7 +37,11 @@ class MenuBar extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const {
+      classes,
+      history
+    } = this.props
+    
     const { auth } = this.state
 
     return (
@@ -52,6 +59,7 @@ class MenuBar extends Component {
               className={classes.flex}
               type="title"
               color="inherit"
+              onClick={() => history.push('/')}
             >
               Readable
             </Typography>
@@ -74,4 +82,4 @@ class MenuBar extends Component {
   }
 }
 
-export default withStyles(styles)(MenuBar)
+export default withRouter(withStyles(styles)(MenuBar))
