@@ -35,6 +35,7 @@ import {
   UdacitySVG
 } from '../categories/Icons'
 
+import CommentsForm from '../comments/CommentsForm'
 import DialogForm from '../DialogForm'
 
 import { connect } from 'react-redux'
@@ -171,7 +172,9 @@ class PostDetails extends Component {
                   open={dialog.open}
                   title="Create a new Comment"
                   id="create-dialog-comment"
-                />
+                >
+                  <CommentsForm />
+                </DialogForm>
                 <Typography
                   type="display1"
                   gutterBottom
