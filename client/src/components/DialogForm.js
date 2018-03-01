@@ -5,15 +5,14 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 
-import FormPosts from './posts/FormPosts'
-
 const DialogForm = props => {
 
   const {
     open,
     title,
     id,
-    closeDialog
+    closeDialog,
+    children
   } = props
 
   return (
@@ -27,7 +26,7 @@ const DialogForm = props => {
           {title}
         </DialogTitle>
         <DialogContent>
-          <FormPosts />
+          {children}
         </DialogContent>
       </Dialog>
     </div>
