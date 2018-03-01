@@ -2,7 +2,7 @@ import * as postsRequest from '../../api/posts'
 
 export const GET_POSTS = 'GET_POSTS'
 export const GET_POST_BY_ID = 'GET_POST_BY_ID'
-export const GET_POSTS_COMMENTS = 'GET_POSTS_COMMENTS'
+export const GET_POST_COMMENTS = 'GET_POST_COMMENTS'
 export const CREATE_POST = 'CREATE_POST'
 export const CREATE_VOTE_POST = 'CREATE_VOTE_POST'
 export const UPDATE_POST = 'UPDATE_POST'
@@ -43,7 +43,7 @@ export const getPostById = postId => {
 export const getPostComments = postId => {
   return dispatch => {
     postsRequest.getPostComments(postId).then(comments =>
-      dispatch({ type: GET_POSTS_COMMENTS, comments })
+      dispatch({ type: GET_POST_COMMENTS, comments })
     )
   }
 }
