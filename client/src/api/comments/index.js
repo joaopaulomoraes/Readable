@@ -45,5 +45,5 @@ export const updateComment = (commentId) => {
  * @returns {Promise} The comment data with the deleted value set to true
  */
 export const deleteComment = (commentId) => {
-  return ReadableAPI.delete(`/comments/${commentId}`)
+   return ( objectData ) => ReadableAPI.delete(`/comments/${commentId}`, objectData)
 }
