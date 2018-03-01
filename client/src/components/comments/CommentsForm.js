@@ -1,14 +1,10 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { withStyles } from 'material-ui/styles'
-import MenuItem from 'material-ui/Menu/MenuItem'
 import Button from 'material-ui/Button'
+import { reduxTextField } from '../form'
 import { connect } from 'react-redux'
-
-import {
-  reduxTextField,
-  reduxSelectField
-} from '../form'
+import { withRouter } from 'react-router-dom'
 
 import { closeDialog } from '../../actions'
 
@@ -41,13 +37,15 @@ const styles = theme => ({
  * @param {object} dispatch - Make the dispatch with the data
  * @returns {object} A new comment data
  */
-const onSubmit = (values, dispatch) => {
+const onSubmit = (values, dispatch, match) => {
+  const { match: { params: { postId } } } = match
+
   const objectData = {
     id: generateId(),
     timestamp: unixTimestamp(),
     body: values.body,
     author: values.author,
-    parentId: '?????????????postId'
+    parentId: postId
   }
 
   return (
@@ -78,8 +76,7 @@ const CategoriesPost = props => {
   const {
     classes,
     handleSubmit,
-    closeDialog,
-    categories,
+    closeDialog
   } = props
 
   return (
@@ -89,6 +86,7 @@ const CategoriesPost = props => {
     >
       <form onSubmit={handleSubmit}>
         <Field
+          autoFocus
           name="body"
           label="Body"
           component={reduxTextField}
@@ -129,11 +127,14 @@ const mapDispatchToProps = dispatch => ({
   closeDialog: () => dispatch(closeDialog())
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(reduxForm({
-  form: 'postsForm',
-  validate,
-  onSubmit,
-})(withStyles(styles)(CategoriesPost)))
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(reduxForm({
+      form: 'postsForm',
+      validate,
+      onSubmit,
+    })(withStyles(styles)(CategoriesPost))
+  )
+)
