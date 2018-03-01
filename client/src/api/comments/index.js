@@ -5,7 +5,7 @@ import ReadableAPI from '../'
  * @param {string} commentId - Comment id
  * @returns {Promise} The Promise object that represents a comment
  */
-const getComments = (commentId) => {
+const getComment = (commentId) => {
   return ReadableAPI.get(`/comments/${commentId}`)
 }
 
