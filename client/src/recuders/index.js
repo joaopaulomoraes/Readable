@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux'
 
 import {
   GET_POSTS,
+  GET_POST_BY_ID,
   CREATE_POST,
   CREATE_VOTE_POST,
   DELETE_POST,
@@ -46,6 +47,12 @@ const posts = (state = stateData, action) => {
       return {
         ...state,
         data: posts.data.sort((posts, post) => posts.voteScore < post.voteScore)
+      }
+
+    case GET_POST_BY_ID:
+      return {
+        ...state,
+        data: [post.data]
       }
 
     case CREATE_POST:
