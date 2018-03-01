@@ -5,6 +5,7 @@ import { routerReducer } from 'react-router-redux'
 import {
   GET_POSTS,
   GET_POST_BY_ID,
+  GET_POST_COMMENTS,
   CREATE_POST,
   CREATE_VOTE_POST,
   DELETE_POST,
@@ -17,6 +18,10 @@ import {
   GET_CATEGORIES,
   GET_CATEGORIES_BY_POST
 } from '../actions/categories'
+
+import {
+  CREATE_COMMENT
+} from '../actions/comments'
 
 import {
   OPEN_DIALOG,
@@ -37,7 +42,9 @@ const posts = (state = stateData, action) => {
   const {
     posts,
     post,
-    order
+    order,
+    comments,
+    comment
   } = action
 
   const { data } = state
@@ -53,6 +60,12 @@ const posts = (state = stateData, action) => {
       return {
         ...state,
         data: [post.data]
+      }
+
+    case GET_POST_COMMENTS:
+      return {
+        ...state,
+        comments
       }
 
     case CREATE_POST:
@@ -96,6 +109,15 @@ const posts = (state = stateData, action) => {
       return {
         ...state,
         data: posts.data
+      }
+
+    case CREATE_COMMENT:
+      return {
+        ...state,
+        comments: {
+          data: state.comments.data.concat(comment.data) 
+        },
+        data: data.map(post => post.id === comment.data.parentId ? (post.commentCount += 1, post) : post)
       }
 
     default:
