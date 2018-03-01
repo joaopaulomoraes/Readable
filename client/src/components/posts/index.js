@@ -1,32 +1,29 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
-
 import Card, {
   CardHeader,
   CardContent,
-  CardActions
+  CardActions,
 } from 'material-ui/Card'
-
-import Menu, { MenuItem } from 'material-ui/Menu'
 import Avatar from 'material-ui/Avatar'
 import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import Badge from 'material-ui/Badge'
 import Button from 'material-ui/Button'
-
 import {
   ThumbUp,
   ThumbDown,
   ThumbsUpDown,
   Comment,
-  Delete,
   Add,
-  FormatListBulleted,
+  ArrowForward,
   ErrorOutline
 } from 'material-ui-icons'
 
+import FormPosts from '../../components/posts/FormPosts'
 import OrderPosts from './OrderPosts'
 import DialogForm from '../DialogForm'
 
@@ -43,8 +40,7 @@ import { connect } from 'react-redux'
 
 import {
   getPosts,
-  createVotePost,
-  deletePost
+  createVotePost
 } from '../../actions/posts'
 
 import { openDialog } from '../../actions'
@@ -87,20 +83,8 @@ class Posts extends Component {
     classes: PropTypes.object.isRequired
   }
 
-  state = {
-    anchorEl: null
-  }
-
   componentDidMount () {
     this.props.getPosts()
-  }
-
-  handleClickAnchor = event => {
-    this.setState({ anchorEl: event.currentTarget })
-  }
-
-  handleCloseAnchor = () => {
-    this.setState({ anchorEl: null })
   }
 
   handleCategory = (category) => {
@@ -120,15 +104,11 @@ class Posts extends Component {
     const {
       classes,
       handleVote,
-      deletePost,
       posts,
       dialog,
-      openDialog
+      openDialog,
+      history
     } = this.props
-
-    const {
-      anchorEl
-    } = this.state
 
     return (
       <div
@@ -149,7 +129,9 @@ class Posts extends Component {
           open={dialog.open}
           title="Create a new post"
           id="create-dialog-post"
-        />
+        >
+          <FormPosts />
+        </DialogForm>
 
         <Grid
           container
@@ -181,7 +163,7 @@ class Posts extends Component {
               item
               xs={12}
               sm={6}
-              md={6}
+              md={4}
               lg={3}
               key={post.author}
             >
@@ -198,32 +180,10 @@ class Posts extends Component {
                   action={
                     <div id="actions-post">
                       <IconButton
-                        aria-label="Actions"
-                        aria-owns={anchorEl ? 'long-menu' : null}
-                        aria-haspopup="true"
-                        onClick={this.handleClickAnchor}
+                        onClick={() => history.push(`/posts/${post.id}`)}
                       >
-                        <FormatListBulleted />
+                        <ArrowForward />
                       </IconButton>
-                      <Menu
-                        id="long-menu"
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={this.handleCloseAnchor}
-                      >
-                        <MenuItem onClick={this.handleCloseAnchor}>
-                          <FormatListBulleted
-                            onClick={() => null}
-                            color="primary"
-                          />
-                        </MenuItem>
-                        <MenuItem onClick={this.handleCloseAnchor}>
-                          <Delete
-                            onClick={() => deletePost(post.id)({ deleted: true, parentDeleted: true })}
-                            color="secondary"
-                          />
-                        </MenuItem>
-                      </Menu>
                     </div>
                   }
                   title={post.title}
@@ -298,11 +258,12 @@ const mapStateToProps = ({ posts, dialog }) => {
 const mapDispatchToProps = dispatch => ({
   getPosts: () => dispatch(getPosts()),
   openDialog: () => dispatch(openDialog()),
-  handleVote: postId => option => dispatch(createVotePost(postId)(option)),
-  deletePost: postId => objectData => dispatch(deletePost(postId)(objectData))
+  handleVote: postId => option => dispatch(createVotePost(postId)(option))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Posts))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withStyles(styles)(Posts))
+)
