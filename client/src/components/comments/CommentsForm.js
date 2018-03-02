@@ -6,8 +6,6 @@ import { reduxTextField } from '../form'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { closeDialog } from '../../actions'
-
 import {
   generateId,
   unixTimestamp
@@ -37,8 +35,8 @@ const styles = theme => ({
  * @param {object} dispatch - Make the dispatch with the data
  * @returns {object} A new comment data
  */
-const onSubmit = (values, dispatch, match) => {
-  const { match: { params: { postId } } } = match
+const onSubmit = (values, dispatch, props) => {
+  const { match: { params: { postId } }, closeDialog } = props
 
   const objectData = {
     id: generateId(),
@@ -50,7 +48,7 @@ const onSubmit = (values, dispatch, match) => {
 
   return (
     dispatch(createComment()(objectData)),
-    dispatch(closeDialog())
+    closeDialog()
   )
 }
 
@@ -123,15 +121,8 @@ const CategoriesPost = props => {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  closeDialog: () => dispatch(closeDialog())
-})
-
 export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(reduxForm({
+  connect()(reduxForm({
       form: 'postsForm',
       validate,
       onSubmit,
