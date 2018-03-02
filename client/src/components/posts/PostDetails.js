@@ -9,6 +9,10 @@ import Card, {
   CardContent,
   CardActions
 } from 'material-ui/Card'
+import Dialog, {
+  DialogTitle,
+  DialogContent
+} from 'material-ui/Dialog'
 import Collapse from 'material-ui/transitions/Collapse'
 import Avatar from 'material-ui/Avatar'
 import Button from 'material-ui/Button'
@@ -28,6 +32,7 @@ import {
   ExpandMore
 } from 'material-ui-icons'
 
+import FormPosts from './FormPosts'
 import Comments from '../comments'
 
 import {
@@ -98,7 +103,8 @@ class PostDetails extends Component {
 
   state = {
     anchorEl: null,
-    expanded: true
+    expanded: true,
+    open: false
   }
 
   componentDidMount () {
@@ -110,12 +116,20 @@ class PostDetails extends Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleCloseAnchor = () => {
+  commentDialogCloseAnchor = () => {
     this.setState({ anchorEl: null })
   }
 
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded })
+  }
+
+  commentDialogOpen = () => {
+    this.setState({ open: true })
+  }
+
+  commentDialogClose = () => {
+    this.setState({ open: false })
   }
 
   handleCategory = (category) => {
@@ -144,7 +158,8 @@ class PostDetails extends Component {
 
     const {
       anchorEl,
-      expanded
+      expanded,
+      open
     } = this.state
 
     return (
@@ -167,17 +182,17 @@ class PostDetails extends Component {
                   color="primary"
                   aria-label="add"
                   className={classes.fab}
-                  onClick={openDialog}
+                  onClick={this.commentDialogOpen}
                 >
                   <Add />
                 </Button>
 
                 <DialogForm
                   open={dialog.open}
-                  title="Create a new Comment"
-                  id="create-dialog-comment"
+                  title="Update Post"
+                  id="update-dialog-post"
                 >
-                  <CommentsForm />
+                  <FormPosts />
                 </DialogForm>
                 <Typography
                   type="display1"
@@ -185,6 +200,19 @@ class PostDetails extends Component {
                 >
                   Post details
                 </Typography>
+
+                <Dialog
+                  open={open}
+                  onClose={this.commentDialogClose}
+                  aria-labelledby="create-dialog-comment"
+                >
+                  <DialogTitle id="create-dialog-comment">
+                    {'Create a new Comment'}
+                  </DialogTitle>
+                  <DialogContent>
+                    <CommentsForm closeDialog={this.commentDialogClose} />
+                  </DialogContent>
+                </Dialog>
               </div>
             ): null}
           </Grid>
@@ -220,15 +248,15 @@ class PostDetails extends Component {
                         id="long-menu"
                         anchorEl={anchorEl}
                         open={Boolean(anchorEl)}
-                        onClose={this.handleCloseAnchor}
+                        onClose={this.commentDialogCloseAnchor}
                       >
-                        <MenuItem onClick={this.handleCloseAnchor}>
+                        <MenuItem onClick={this.commentDialogCloseAnchor}>
                           <ModeEdit
-                            onClick={() => null}
+                            onClick={openDialog}
                             color="primary"
                           />
                         </MenuItem>
-                        <MenuItem onClick={this.handleCloseAnchor}>
+                        <MenuItem onClick={this.commentDialogCloseAnchor}>
                           <Delete
                             onClick={() => deletePost(post.id)({ deleted: true, parentDeleted: true })}
                             color="secondary"
