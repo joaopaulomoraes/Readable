@@ -98,7 +98,7 @@ class PostDetails extends Component {
 
   state = {
     anchorEl: null,
-    expanded: false
+    expanded: true
   }
 
   componentDidMount () {
