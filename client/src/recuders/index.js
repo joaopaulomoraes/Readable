@@ -20,7 +20,9 @@ import {
 } from '../actions/categories'
 
 import {
-  CREATE_COMMENT
+  CREATE_COMMENT,
+  CREATE_VOTE_COMMENT,
+  DELETE_COMMENT
 } from '../actions/comments'
 
 import {
@@ -50,6 +52,11 @@ const posts = (state = stateData, action) => {
   const { data } = state
 
   switch (action.type) {
+
+    /**
+     * @description Manages the state of all posts
+     * @returns The updated copy of the previous state
+     */
     case GET_POSTS:
       return {
         ...state,
@@ -104,20 +111,52 @@ const posts = (state = stateData, action) => {
                 : data.sort((posts, post) => posts.voteScore < post.voteScore)
           : null
       }
-
+    
+    /**
+     * @description Manages the state of all categories
+     */
     case GET_CATEGORIES_BY_POST:
       return {
         ...state,
         data: posts.data
       }
-
+    
+    /**
+     * @description Manages the state of all comments
+     */
     case CREATE_COMMENT:
       return {
         ...state,
         comments: {
-          data: state.comments.data.concat(comment.data) 
+          data: state.comments.data.concat(comment.data)
         },
-        data: data.map(post => post.id === comment.data.parentId ? (post.commentCount += 1, post) : post)
+        data: data.map(post => 
+          post.id === comment.data.parentId
+          ? (post.commentCount += 1, post)
+          : post
+        )
+      }
+
+    case CREATE_VOTE_COMMENT:
+      return {
+        ...state,
+        comments: {
+          data: state.comments.data.map(c => {
+            return (
+              c.id === comment.data.id
+              ? (c.voteScore = comment.data.voteScore, c)
+              : (c.voteScore, c)
+            )
+          }).sort((comments, comment) => comments.voteScore < comment.voteScore)
+        }
+      }
+
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        comments: {
+          data: state.comments.data.filter(comments => comments.id !== comment.data.id)
+        }
       }
 
     default:
