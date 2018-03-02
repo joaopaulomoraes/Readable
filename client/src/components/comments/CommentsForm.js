@@ -11,7 +11,10 @@ import {
   unixTimestamp
 } from '../../utils'
 
-import { createComment } from '../../actions/comments'
+import {
+  createComment,
+  updateComment
+} from '../../actions/comments'
 
 const styles = theme => ({
   container: {
@@ -36,19 +39,20 @@ const styles = theme => ({
  * @returns {object} A new comment data
  */
 const onSubmit = (values, dispatch, props) => {
-  const { match: { params: { postId } }, closeDialog } = props
+  const { match: { params: { postId } }, commentId, closeDialog } = props
 
   const objectData = {
-    id: generateId(),
-    timestamp: unixTimestamp(),
+    id: values.id || generateId(),
+    timestamp: values.timestamp || unixTimestamp(),
     body: values.body,
     author: values.author,
     parentId: postId
   }
-
+  console.warn(commentId)
   return (
-    dispatch(createComment()(objectData)),
-    closeDialog()
+    ! commentId
+    ? (dispatch(createComment()(objectData)), closeDialog())
+    : (dispatch(updateComment(commentId)(objectData), closeDialog()))
   )
 }
 
@@ -121,8 +125,22 @@ const CategoriesPost = props => {
   )
 }
 
+const mapStateToProps = ({ posts: { comments } }, props) => {
+  return {
+    comments,
+    /*
+     * Little magic to filter the comment and extract the first position of the sector
+     */
+    initialValues: comments.data.filter(comments => comments.id === props.commentId)[0]
+  }
+}
+
+
 export default withRouter(
-  connect()(reduxForm({
+  connect(
+    mapStateToProps,
+    null
+  )(reduxForm({
       form: 'postsForm',
       validate,
       onSubmit,
