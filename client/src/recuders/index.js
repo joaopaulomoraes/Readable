@@ -95,8 +95,8 @@ const posts = (state = stateData, action) => {
             posts.id === post.data.id
             ? (posts.voteScore = post.data.voteScore, posts)
             : (posts.voteScore, posts)
-          ) 
-        })
+          )
+        }).sort((posts, post) => posts.voteScore < post.voteScore)
       }
 
     case ORDER_POSTS_BY:
@@ -141,11 +141,11 @@ const posts = (state = stateData, action) => {
       return {
         ...state,
         comments: {
-          data: state.comments.data.map(c => {
+          data: state.comments.data.map(comments => {
             return (
-              c.id === comment.data.id
-              ? (c.voteScore = comment.data.voteScore, c)
-              : (c.voteScore, c)
+              comments.id === comment.data.id
+              ? (comments.voteScore = comment.data.voteScore, comments)
+              : (comments.voteScore, comments)
             )
           }).sort((comments, comment) => comments.voteScore < comment.voteScore)
         }
