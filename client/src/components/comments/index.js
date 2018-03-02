@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
+import Dialog, {
+  DialogTitle,
+  DialogContent
+} from 'material-ui/Dialog'
 import Card, {
   CardHeader,
   CardContent,
@@ -15,9 +19,11 @@ import {
   ThumbUp,
   ThumbDown,
   ThumbsUpDown,
-  //ModeEdit,
+  ModeEdit,
   Delete
 } from 'material-ui-icons'
+
+import CommentsForm from '../comments/CommentsForm'
 
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -44,9 +50,21 @@ class Comments extends Component {
     classes: PropTypes.object.isRequired
   }
 
+  state = {
+    open: false
+  }
+
   componentDidMount () {
     const { match: { params: { postId } } } = this.props
     this.props.getPostComments(postId)
+  }
+
+  commentDialogOpen = elementId => {
+    this.setState({ open: Boolean(elementId) })
+  }
+
+  commentDialogClose = () => {
+    this.setState({ open: false })
   }
 
   render() {
@@ -59,7 +77,7 @@ class Comments extends Component {
     } = this.props
 
     return (
-      <div id="comments">
+      <div id="comments">        
         <CardContent>
         {comments !== undefined
         ? (
@@ -72,6 +90,21 @@ class Comments extends Component {
               className={classes.comment}
               key={comment.id}
             >
+              <Dialog
+                open={this.state.open}
+                onClose={this.commentDialogClose}
+                aria-labelledby={`update-dialog${comment.id}-comment`}
+              >
+                <DialogTitle id={`update-dialog${comment.id}-comment`}>
+                  {'Update Comment'}
+                </DialogTitle>
+                <DialogContent>
+                  <CommentsForm
+                    commentId={comment.id}
+                    closeDialog={this.commentDialogClose}
+                  />
+                </DialogContent>
+              </Dialog>
               <Divider/>
               <CardHeader
                 avatar={
@@ -82,9 +115,13 @@ class Comments extends Component {
                   />
                 }
                 action={
-                  <CardActions
-                    disableActionSpacing
-                  >
+                  <CardActions disableActionSpacing>
+                    <IconButton
+                      aria-label="Update"
+                      onClick={() => this.commentDialogOpen(comment.id)}
+                    >
+                      <ModeEdit />
+                    </IconButton>
                     <IconButton
                       aria-label="Vote up"
                       onClick={() => handleVoteComment(comment.id)({option: 'upVote'})}
