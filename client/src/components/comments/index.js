@@ -67,7 +67,7 @@ class Comments extends Component {
             Comments
           </Typography>
         )
-        ? comments.data.map((comment, i) => (
+        ? comments.data.map(comment => (
             <Card
               className={classes.comment}
               key={comment.id}
@@ -78,7 +78,7 @@ class Comments extends Component {
                   <Avatar
                     className={classes.avatar}
                     alt="Readable Avatar"
-                    src={`https://api.adorable.io/avatars/50/${i}@readable-react-redux`}
+                    src={`https://api.adorable.io/avatars/50/${comment.id}@readable-react-redux`}
                   />
                 }
                 action={
