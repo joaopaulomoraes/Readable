@@ -8,6 +8,7 @@ import {
   GET_POST_COMMENTS,
   CREATE_POST,
   CREATE_VOTE_POST,
+  UPDATE_POST,
   DELETE_POST,
   ORDER_POSTS_BY,
   ORDER_POSTS_BY_DATE,
@@ -97,6 +98,12 @@ const posts = (state = stateData, action) => {
             : (posts.voteScore, posts)
           )
         }).sort((posts, post) => posts.voteScore < post.voteScore)
+      }
+
+    case UPDATE_POST:
+      return {
+        ...state,
+        data: data.filter(posts => posts.id !== post.data.id).concat([post.data])
       }
 
     case ORDER_POSTS_BY:
