@@ -23,7 +23,8 @@ import {
 import {
   CREATE_COMMENT,
   CREATE_VOTE_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  UPDATE_COMMENT
 } from '../actions/comments'
 
 import {
@@ -163,6 +164,14 @@ const posts = (state = stateData, action) => {
         ...state,
         comments: {
           data: state.comments.data.filter(comments => comments.id !== comment.data.id)
+        }
+      }
+
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        comments: {
+          data: state.comments.data.filter(comments => comments.id !== comment.data.id).concat([comment.data])
         }
       }
 
