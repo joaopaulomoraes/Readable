@@ -28,7 +28,7 @@ In another window, install the dependencies and run the local server at http://l
 > nodemon server (or node server)
 ```
 
-## Debug the api with a rest client
+## Debug the api with a rest client (optional)
 
 Access the `rest-client` directory for more information [rest client directory](/rest-client).
 
