@@ -4,7 +4,7 @@ First, download Insomnia [here](https://insomnia.rest/download/).
 
 Go to your insomnia preferences.
 
-![alt text](img/open=preferences.png "Open preferences")
+![alt text](img/open-preferences.png "Open preferences")
 
 In Preferences, select the Data tab and import the file `api-requests.json`.
 
@@ -12,4 +12,4 @@ In Preferences, select the Data tab and import the file `api-requests.json`.
 
 Enjoy! :p
 
-![alt text](img/img/enjoy.png "Enjoy :p")
+![alt text](img/enjoy.png "Enjoy :p")
