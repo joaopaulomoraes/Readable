@@ -136,7 +136,7 @@ const posts = (state = stateData, action) => {
       return {
         ...state,
         comments: {
-          data: state.comments.data.concat(comment.data)
+          data: state.comments.data.concat(comment.data).sort((comments, comment) => comments.voteScore < comment.voteScore)
         },
         data: data.map(post => 
           post.id === comment.data.parentId
