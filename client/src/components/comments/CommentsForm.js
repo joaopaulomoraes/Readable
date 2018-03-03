@@ -42,7 +42,7 @@ const onSubmit = (values, dispatch, props) => {
   const { match: { params: { postId } }, commentId, closeDialog } = props
 
   const objectData = {
-    id: values.id || generateId(),
+    id: commentId || generateId(),
     timestamp: values.timestamp || unixTimestamp(),
     body: values.body,
     author: values.author,
