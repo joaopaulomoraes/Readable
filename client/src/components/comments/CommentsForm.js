@@ -48,7 +48,7 @@ const onSubmit = (values, dispatch, props) => {
     author: values.author,
     parentId: postId
   }
-  console.warn(commentId)
+
   return (
     ! commentId
     ? (dispatch(createComment()(objectData)), closeDialog())
