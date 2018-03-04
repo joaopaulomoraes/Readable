@@ -87,7 +87,7 @@ const mapStateToProps = ({ categories }) => {
 
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(getCategories()),
-  postsByCategory: category => dispatch(push(`/categories/${category}`)),
+  postsByCategory: category => dispatch(push(`/${category}`)),
   getCategoriesByPost: category => dispatch(getCategoriesByPost(category))
 })
 

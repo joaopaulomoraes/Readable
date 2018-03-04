@@ -180,7 +180,7 @@ class Posts extends Component {
                   action={
                     <div id="actions-post">
                       <IconButton
-                        onClick={() => history.push(`/posts/${post.id}`)}
+                        onClick={() => history.push(`/${post.category}/${post.id}`)}
                       >
                         <ArrowForward />
                       </IconButton>

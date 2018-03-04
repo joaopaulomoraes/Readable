@@ -11,12 +11,12 @@ const routes = [
   },
   {
     exact: true,
-    path: '/categories/:category',
+    path: '/:category',
     component: PostsByCategory
   },
   {
     exact: true,
-    path: '/posts/:postId',
+    path: '/:category/:postId',
     component: PostDetails
   },
   {
