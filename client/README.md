@@ -13,7 +13,7 @@ Install dependencies and serve with hot reload at http://localhost:3000.
 > yarn start
 ```
 
-More information on running the local server can be found here. [rest client directory](../server).
+More information on running the local server can be found here. [server directory](../server).
 
 ## License
 
