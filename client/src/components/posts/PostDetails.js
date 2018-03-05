@@ -153,7 +153,8 @@ class PostDetails extends Component {
       deletePost,
       posts,
       openDialog,
-      dialog
+      dialog,
+      match: { params: { category } }
     } = this.props
 
     const {
@@ -219,124 +220,126 @@ class PostDetails extends Component {
 
           {posts.data.length
             ? posts.data.map(post => (
-            <Grid
-              item
-              xs={12}
-              key={post.author}
-            >
-              <Card className={classes.card}>
-                <CardHeader
-                  avatar={
-                    <Avatar
-                      aria-label="Post"
-                      className={classes.avatar}
+                post.category === category ? (
+                <Grid
+                  item
+                  xs={12}
+                  key={post.author}
+                >
+                  <Card className={classes.card}>
+                    <CardHeader
+                      avatar={
+                        <Avatar
+                          aria-label="Post"
+                          className={classes.avatar}
+                        >
+                          {this.handleCategory(post.category)}
+                        </Avatar>
+                      }
+                      action={
+                        <div id="actions-post">
+                          <IconButton
+                            aria-label="Actions"
+                            aria-owns={anchorEl ? 'long-menu' : null}
+                            aria-haspopup="true"
+                            onClick={this.handleClickAnchor}
+                          >
+                            <FormatListBulleted />
+                          </IconButton>
+                          <Menu
+                            id="long-menu"
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={this.commentDialogCloseAnchor}
+                          >
+                            <MenuItem onClick={this.commentDialogCloseAnchor}>
+                              <ModeEdit
+                                onClick={openDialog}
+                                color="primary"
+                              />
+                            </MenuItem>
+                            <MenuItem onClick={this.commentDialogCloseAnchor}>
+                              <Delete
+                                onClick={() => deletePost(post.id)({ deleted: true, parentDeleted: true })}
+                                color="secondary"
+                              />
+                            </MenuItem>
+                          </Menu>
+                        </div>
+                      }
+                      title={post.title}
+                      subheader={`Posted by ${post.author} | ${post.category} | ${moment(post.timestamp).format('LL')}`}
+                    />
+                    <CardContent>
+                      <Typography component="p">
+                        {post.body}
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      className={classes.actions}
+                      disableActionSpacing
                     >
-                      {this.handleCategory(post.category)}
-                    </Avatar>
-                  }
-                  action={
-                    <div id="actions-post">
                       <IconButton
-                        aria-label="Actions"
-                        aria-owns={anchorEl ? 'long-menu' : null}
-                        aria-haspopup="true"
-                        onClick={this.handleClickAnchor}
+                        aria-label="Vote up"
+                        onClick={() => handleVote(post.id)({ option: 'upVote' })}
+                        color="primary"
                       >
-                        <FormatListBulleted />
+                        <ThumbUp />
                       </IconButton>
-                      <Menu
-                        id="long-menu"
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={this.commentDialogCloseAnchor}
+                      <IconButton
+                        aria-label="Vote down"
+                        onClick={() => handleVote(post.id)({ option: 'downVote' })}
+                        color="secondary"
                       >
-                        <MenuItem onClick={this.commentDialogCloseAnchor}>
-                          <ModeEdit
-                            onClick={openDialog}
-                            color="primary"
-                          />
-                        </MenuItem>
-                        <MenuItem onClick={this.commentDialogCloseAnchor}>
-                          <Delete
-                            onClick={() => deletePost(post.id)({ deleted: true, parentDeleted: true })}
-                            color="secondary"
-                          />
-                        </MenuItem>
-                      </Menu>
-                    </div>
-                  }
-                  title={post.title}
-                  subheader={`Posted by ${post.author} | ${post.category} | ${moment(post.timestamp).format('LL')}`}
-                />
-                <CardContent>
-                  <Typography component="p">
-                    {post.body}
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  className={classes.actions}
-                  disableActionSpacing
-                >
-                  <IconButton
-                    aria-label="Vote up"
-                    onClick={() => handleVote(post.id)({ option: 'upVote' })}
-                    color="primary"
-                  >
-                    <ThumbUp />
-                  </IconButton>
-                  <IconButton
-                    aria-label="Vote down"
-                    onClick={() => handleVote(post.id)({ option: 'downVote' })}
-                    color="secondary"
-                  >
-                    <ThumbDown />
-                  </IconButton>
-                  <IconButton
-                    aria-label="Votes"
-                    disabled
-                  >
-                    <Badge
-                      className={classes.badge}
-                      badgeContent={post.voteScore}
-                      color={post.voteScore > 0 ? 'primary' : 'secondary'}
+                        <ThumbDown />
+                      </IconButton>
+                      <IconButton
+                        aria-label="Votes"
+                        disabled
+                      >
+                        <Badge
+                          className={classes.badge}
+                          badgeContent={post.voteScore}
+                          color={post.voteScore > 0 ? 'primary' : 'secondary'}
+                        >
+                          <ThumbsUpDown color="disabled" />
+                        </Badge>
+                      </IconButton>
+                      <IconButton
+                        aria-label="Vote down"
+                        disabled
+                      >
+                        <Badge
+                          className={classes.badge}
+                          badgeContent={post.commentCount}
+                          color="primary"
+                        >
+                          <Comment color="disabled" />
+                        </Badge>
+                      </IconButton>
+                      <IconButton
+                        className={classnames(classes.expand, {
+                          [classes.expandOpen]: expanded
+                        })}
+                        onClick={this.handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="Show more"
+                      >
+                        <ExpandMore />
+                      </IconButton>
+                    </CardActions>
+                    <Collapse
+                      in={expanded}
+                      timeout="auto"
+                      unmountOnExit
+                      className={classes.collapse}
                     >
-                      <ThumbsUpDown color="disabled" />
-                    </Badge>
-                  </IconButton>
-                  <IconButton
-                    aria-label="Vote down"
-                    disabled
-                  >
-                    <Badge
-                      className={classes.badge}
-                      badgeContent={post.commentCount}
-                      color="primary"
-                    >
-                      <Comment color="disabled" />
-                    </Badge>
-                  </IconButton>
-                  <IconButton
-                    className={classnames(classes.expand, {
-                      [classes.expandOpen]: expanded
-                    })}
-                    onClick={this.handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="Show more"
-                  >
-                    <ExpandMore />
-                  </IconButton>
-                </CardActions>
-                <Collapse
-                  in={expanded}
-                  timeout="auto"
-                  unmountOnExit
-                  className={classes.collapse}
-                >
-                  <Comments />
-                </Collapse>
-              </Card>
-            </Grid>
-          )) : (
+                      <Comments />
+                    </Collapse>
+                  </Card>
+                </Grid>
+                ): <NotFound message="Category not found." />
+            )) : (
             <NotFound message="Post not found." />
           )}
         </Grid>
