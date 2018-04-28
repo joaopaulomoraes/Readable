@@ -338,7 +338,7 @@ class PostDetails extends Component {
                     </Collapse>
                   </Card>
                 </Grid>
-                ): <NotFound message="Post or category not found." />
+                ): <NotFound key={category} message="Post or category not found." />
             )) : (
             <NotFound message="Post not found." />
           )}
